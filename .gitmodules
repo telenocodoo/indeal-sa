@@ -1,0 +1,4 @@
+[submodule "abdtrust11/custom-indeal"]
+	path = abdtrust11/custom-indeal
+	url = git@github.com:abdtrust11/custom-indeal.git
+	branch = main
