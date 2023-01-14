@@ -1,0 +1,20 @@
+<odoo>
+    <record id="res_partner_indeal_form_view" model="ir.ui.view">
+        <field name="name">res.partner.ideal.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="vat" position="before">
+                <field name="x_cr_indeal" string="CR#" />
+                
+            </field>
+            <div class="oe_title mb24" position="after">
+                <div class="oe_title mb24">
+                    <field name="legal_name_in_english_indeal" string="Legal Name In Englis"/>
+                </div>
+              
+            </div>
+            
+        </field>
+    </record>
+</odoo>

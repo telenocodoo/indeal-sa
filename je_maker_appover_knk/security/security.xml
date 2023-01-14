@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_maker_user">
+            <field name="name">Accounting Entries (JV)</field>
+        </record>
+        <record id='maker_user' model="res.groups">
+            <field name="name">Maker</field>
+            <field name="category_id" ref="module_category_maker_user" />
+        </record>
+        <record id='review_user' model="res.groups">
+            <field name="name">Reviewed</field>
+            <field name="category_id" ref="module_category_maker_user" />
+        </record>
+        <record id='approver_user' model="res.groups">
+            <field name="name">Approved</field>
+            <field name="category_id" ref="module_category_maker_user" />
+        </record>
+    </data>
+</odoo>

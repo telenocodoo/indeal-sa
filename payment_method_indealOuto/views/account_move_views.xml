@@ -1,0 +1,28 @@
+<odoo>
+    <record id="indeal_invoice_form" model="ir.ui.view">
+        <field name="name">account.move.form.indeal</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="duration_indeal" string="Durtion"/>
+                <field name="shipment_id_ideal" string="Shipment ID" attrs="{'invisible': [('logistic_inv_indeal', '=', False)]}" />
+                <field name="buyer_indeal" string="Buyer"/>
+            
+            </field>
+            <div name="journal_div" position="after">
+                <label for="payment_method_indeal"/>
+                <div class="d-flex">
+                    <field name="payment_method_indeal" string="Payment Mehtod"/>
+                </div>
+                <label for="logistic_inv_indeal" />
+                <div class="d-flex">
+                    <field name="logistic_inv_indeal" string="Logistic Invoice"/>
+                </div>
+                
+            </div>
+        </field>
+    </record>
+
+    
+</odoo>

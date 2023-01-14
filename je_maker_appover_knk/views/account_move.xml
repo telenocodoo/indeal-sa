@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <record model="ir.ui.view" id="view_account_move_tree_inherit">
+        <field name="name">account.move.tree.mods</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree" />
+        <field name="groups_id" eval="[(6, 0, [ref('je_maker_appover_knk.approver_user') ])]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">0</attribute>
+            </xpath>
+        </field> 
+    </record> -->
+    <record model="ir.ui.view" id="view_account_move_inherits">
+        <field name="name">account.move.form.mods</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="groups_id" eval="[(6, 0, [ref('je_maker_appover_knk.approver_user') ])]" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.approver_user</attribute>
+            </xpath>
+            <xpath expr="//notebook//page[@id='aml_tab']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.approver_user</attribute>
+            </xpath>
+            <xpath expr="//header//button[@name='action_post']" position="before">
+                <button name="button_confirm_review" string="Reviewed" type="object" class="oe_highlight" groups="je_maker_appover_knk.review_user" attrs="{'invisible' : [('state', '=', 'posted'), ('move_type', 'not in', ('entry'))]}" />
+                <button name="button_reset_to_post" string="Reset To Posted" type="object" class="oe_highlight" groups="je_maker_appover_knk.approver_user" attrs="{'invisible' : [('state', '!=', 'cancel'),('move_type', 'not in', ('entry'))]}" />
+
+            </xpath>
+            
+            <xpath expr="//button[@name='action_invoice_sent']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//button[@name='preview_invoice']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(account.action_view_account_move_reversal)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ['draft', 'review_to_post']), ('move_type', 'not in', ('entry'))]}</attribute>
+                <!-- attrs="{'invisible': []}" -->
+            </xpath>
+
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.approver_user</attribute>
+            </xpath>
+<!-- review_to_post -->
+            <!-- <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.review_user</attribute>
+            </xpath> -->
+<!-- =============================================================== -->
+            
+            <!-- <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.review_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', 'not in', ['draft', 'review_to_post'])]}</attribute>
+            </xpath> -->
+
+            <!-- ==================================================== -->
+
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.approver_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', 'not in', ['draft', 'ready_to_post'])]}</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.approver_user</attribute>
+            </xpath>
+
+            <xpath expr="//page[@id='other_tab_entry']//field[@name='company_id']" position="after">
+                <!-- <field name="inalterable_hash" groups="base.group_no_one"/> -->
+                <field name="user_id" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}" />      
+                <!-- <field name="approved_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>       -->
+                <field name="reviwed_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>
+                <field name="approved_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>      
+
+            </xpath>
+           
+           
+
+
+        </field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="view_account_move_inherit">
+        <field name="name">account.move.form.mod</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="groups_id" eval="[(6, 0, [ref('je_maker_appover_knk.maker_user') ])]" />
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@id='aml_tab']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.maker_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='journal_id']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.maker_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_sent']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//button[@name='preview_invoice']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(account.action_view_account_move_reversal)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//header//button[@name='action_post']" position="before">
+                <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" groups="je_maker_appover_knk.maker_user" attrs="{'invisible' : ['|',('state', '!=', 'draft'),('move_type', 'not in', ('entry'))]}" />
+            </xpath>
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,ready_to_post,posted" attrs="{'invisible' : [('state', '!=', 'ready_to_post')]}" />
+                <field name="state" widget="statusbar" statusbar_visible="draft,posted" attrs="{'invisible' : [('state', '=', 'ready_to_post')]}" />
+            </xpath>
+
+             <!-- <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,posted" attrs="{'invisible' : ['|',('state', '!=', 'draft'), ('move_type', 'in', ('entry'))]}" />
+                <field name="state" widget="statusbar" statusbar_visible="draft,ready_to_post,posted" attrs="{'invisible' : ['|',('state', '=', 'posted'), ('move_type', 'not in', ('entry'))]}" />
+            </xpath>
+
+
+            <xpath expr="//header//button[@name='action_post']" position="before">
+                <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" groups="je_maker_appover_knk.maker_user" attrs="{'invisible' : ['|',('move_type', 'not in', ('entry')), ('state', '!=', 'draft')]}" /> 
+                <button name="button_confirm_review" string="Reviewed" type="object" class="oe_highlight" groups="je_maker_appover_knk.review_user" attrs="{'invisible' : [('state', '=', 'ready_to_post')]}" />
+            </xpath>
+            -->
+
+            
+
+          
+
+            <xpath expr="//page[@id='other_tab_entry']//field[@name='company_id']" position="after">
+                <!-- <field name="inalterable_hash" groups="base.group_no_one"/> -->
+                <field name="user_id" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}" />      
+                <!-- <field name="approved_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>       -->
+                <field name="reviwed_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>
+                <field name="approved_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>      
+
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_account_review_move_inherit">
+        <field name="name">account.move.form.modee</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="groups_id" eval="[(6, 0, [ref('je_maker_appover_knk.review_user') ])]" />
+        <!-- <field name="priority">99</field> -->
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//notebook//page[@id='aml_tab']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.maker_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='journal_id']" position="attributes">
+                <attribute name="groups">je_maker_appover_knk.maker_user</attribute>
+            </xpath> -->
+            <xpath expr="//button[@name='action_invoice_sent']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//button[@name='preview_invoice']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(account.action_view_account_move_reversal)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+             <xpath expr="//header//button[@name='action_post']" position="before">
+                <button name="button_confirm_review" string="Reviewed" type="object" class="oe_highlight" groups="je_maker_appover_knk.review_user" attrs="{'invisible' : [('state', '!=', 'ready_to_post')]}" />
+
+                <!-- <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" groups="je_maker_appover_knk.maker_user" attrs="{'invisible' : ['|',('state', '!=', 'draft'),('move_type', 'not in', ('entry'))]}" /> -->
+            </xpath>
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,ready_to_post,review_to_post,posted" attrs="{'invisible' : [('state', '!=', 'ready_to_post')]}" />
+                <field name="state" widget="statusbar" statusbar_visible="draft,posted" attrs="{'invisible' : [('state', '=', 'ready_to_post')]}" />
+            </xpath>
+
+            <!-- <xpath expr="//header//button[@name='action_post']" position="before"> -->
+                <!-- <button name="button_confirm" string="Confirm" type="object" class="oe_highlight" groups="je_maker_appover_knk.maker_user" attrs="{'invisible' : ['|',('move_type', 'not in', ('entry')), ('state', '!=', 'draft')]}" />  -->
+                <!-- <button name="button_confirm_review" string="Reviewed" type="object" class="oe_highlight" groups="je_maker_appover_knk.review_user" attrs="{'invisible' : [('state', '!=', 'ready_to_post')]}" />
+            </xpath> -->
+            <!-- <xpath expr="//field[@name='state']" position="replace"> -->
+                <!-- <field name="state" widget="statusbar" statusbar_visible="draft,posted" attrs="{'invisible' : ['|',('state', '!=', 'draft'), ('move_type', 'in', ('entry'))]}" /> -->
+                <!-- <field name="state" widget="statusbar" statusbar_visible="draft,ready_to_post,posted" attrs="{'invisible' : ['|',('state', '=', 'posted'), ('move_type', 'not in', ('entry'))]}" />
+            </xpath> -->
+
+            
+
+          
+
+            <xpath expr="//page[@id='other_tab_entry']//field[@name='company_id']" position="after">
+                <!-- <field name="inalterable_hash" groups="base.group_no_one"/> -->
+                <field name="user_id" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}" />      
+                <!-- <field name="approved_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>       -->
+                <field name="reviwed_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>
+                <field name="approved_jv" attrs="{'invisible': [ ('move_type', 'not in', ('entry'))]}"/>      
+
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- <menuitem name="Invoicing" id="account.menu_finance" groups="account.group_account_user,account.group_account_manager,account.group_account_invoice,je_maker_appover_knk.approver_user,je_maker_appover_knk.maker_user" web_icon="account,static/description/icon.png" sequence="40" /> -->
+    <!-- <menuitem id="account.menu_finance_receivables" name="Customers" parent="account.menu_finance" sequence="2" groups="account.group_account_manager" /> -->
+    <!-- <menuitem id="account.menu_finance_payables" name="Vendors" parent="account.menu_finance" sequence="3" groups="account.group_account_manager" /> -->
+    <!-- <menuitem id="account.menu_board_journal_1" name="Overview" action="account.open_account_journal_dashboard_kanban" parent="account.menu_finance" sequence="1" groups="account.group_account_user,account.group_account_manager" /> -->
+    <!-- <menuitem id="account.menu_finance_entries_accounting_ledgers" name="Ledgers" parent="account.menu_finance_entries" sequence="3" groups="account.group_account_manager" /> -->
+    <!-- <menuitem id="account.menu_finance_entries_actions" name="Actions" parent="account.menu_finance_entries" sequence="11" groups="account.group_account_manager" /> -->
+    <!-- <menuitem id="account.menu_finance_entries_accounting_journals" name="Journals" parent="account.menu_finance_entries" sequence="2" groups="account.group_account_manager" /> -->
+    <!-- <menuitem id="menu_action_move_journal_form" action="account.action_move_journal_line" parent="account.menu_finance" groups="je_maker_appover_knk.approver_user,je_maker_appover_knk.maker_user" sequence="1" /> -->
+    <record id="account.action_move_journal_line" model="ir.actions.act_window">
+        <field name="name">Journal Entries</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="account.view_move_tree" />
+        <field name="search_view_id" ref="account.view_account_move_filter" />
+        <field name="context">{'is_maker': True, 'is_approver': True,'is_review': True , 'default_type': 'entry', 'search_default_misc_filter':1, 'view_no_maturity': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a journal entry
+            </p>
+            <p>
+                A journal entry consists of several journal items, each of
+                which is either a debit or a credit transaction.
+            </p>
+        </field>
+    </record>
+</odoo>
+
+
+
+
+
+
+
+
+
