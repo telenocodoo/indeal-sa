@@ -2,3 +2,8 @@
 	path = abdtrust11/custom-indeal
 	url = git@github.com:abdtrust11/custom-indeal.git
 	branch = main
+
+[submodule "telenocodoo/indeal-sa"]
+	path = telenocodoo/indeal-sa
+	url = git@github.com:telenocodoo/indeal-sa.git
+	branch = live
